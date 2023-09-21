@@ -1,7 +1,7 @@
 import './App.css';
-import SmoothScroll from './components/SmoothScroll';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './muiTheme';
+import TitleHeader from './components/TitleHeader';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
          <ThemeProvider theme={theme}> 
 
       <main>
-        <SmoothScroll />
+        <TitleHeader />
       </main>
       </ThemeProvider>
     </div>

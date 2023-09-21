@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-scroll';
 import CryptoTracker from '../CryptoTracker';
 
-import "./SmoothScroll.css";
+import "./TitleHeader.css";
 
-const SmoothScroll: React.FC = () => {
+const TitleHeader: React.FC = () => {
   return (
     <div>
       <nav className='navigation'>
@@ -53,4 +53,4 @@ const SmoothScroll: React.FC = () => {
   );
 };
 
-export default SmoothScroll;
+export default TitleHeader;
