@@ -1,49 +1,93 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './CryptoTracker.css';
 
 const CryptoTracker: React.FC = () => {
   const [cryptoData, setCryptoData] = useState<any[]>([]);
-
-  const fetchCryptoData = () => {
-    axios
-      .get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false')
-      .then((response) => {
-        setCryptoData(response.data);
-      })
-      .catch((error) => console.error('Error fetching cryptocurrency data:', error));
-  };
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
-    fetchCryptoData();
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://api.coinlore.net/api/tickers/');
+        setCryptoData(response.data.data);
+        localStorage.setItem('cryptoData', JSON.stringify(response.data.data));
+      } catch (error) {
+        console.error('Error fetching cryptocurrency data:', error);
+      }
+    };
 
-    const intervalId = setInterval(fetchCryptoData, 60000);
+    fetchData();
+
+    const intervalId = setInterval(fetchData, 60000);
 
     return () => clearInterval(intervalId);
   }, []);
 
+  useEffect(() => {
+    const getCachedData = () => {
+      const cachedData = localStorage.getItem('cryptoData');
+      if (cachedData) {
+        setCryptoData(JSON.parse(cachedData));
+      }
+    };
+
+    getCachedData();
+  }, []);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const displayedData = cryptoData.slice(startIndex, endIndex);
+
   return (
     <div>
-      <h2>Cryptocurrency Tracker</h2>
-      <table>
+      <center>
+        <h2>Cryptocurrency Tracker</h2>
+      </center>
+      <table className="crypto-table">
         <thead>
           <tr>
-            <th>Name</th>
+            <th>Coin</th>
             <th>Symbol</th>
+            <th>Rank</th>
             <th>Price (USD)</th>
             <th>Market Cap (USD)</th>
           </tr>
         </thead>
         <tbody>
-          {cryptoData.map((crypto: any) => (
+          {displayedData.map((crypto: any) => (
             <tr key={crypto.id}>
-              <td>{crypto.name}</td>
+              <td>
+                {crypto.name}
+              </td>
+              <td>
+                {crypto.rank}
+              </td>
               <td>{crypto.symbol}</td>
-              <td>${crypto.current_price.toFixed(2)}</td>
-              <td>${crypto.market_cap.toLocaleString()}</td>
+              <td>${parseFloat(crypto.price_usd).toFixed(2)}</td>
+              <td>${parseFloat(crypto.market_cap_usd).toLocaleString()}</td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      <div className="pagination">
+        <button
+          onClick={() => setCurrentPage((prevPage) => prevPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span>Page {currentPage}</span>
+        <button
+          onClick={() => setCurrentPage((prevPage) => prevPage + 1)}
+          disabled={endIndex >= cryptoData.length}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
