@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./CryptoTracker.css";
+import CoinChart from '../CoinCharts'; 
+
 
 const CryptoTracker: React.FC = () => {
   const [cryptoData, setCryptoData] = useState<any[]>([]);
-  console.log("🚀 ~ file: index.tsx:8 ~ cryptoData:", cryptoData)
   const [searchInput, setSearchInput] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 10; 
+  const [selectedCoin, setSelectedCoin] = useState<any | null>(null); 
+
+  const handleCoinClick = (coin: any) => {
+    setSelectedCoin(coin);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedCoin(null);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,7 +73,7 @@ const CryptoTracker: React.FC = () => {
         <input
           className='search-bar'
           type="text"
-          placeholder="Search by name"
+          placeholder="Search Coin"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />
@@ -83,7 +93,7 @@ const CryptoTracker: React.FC = () => {
         </thead>
         <tbody>
           {filteredCryptoData.map((crypto: any) => (
-            <tr key={crypto?.id}>
+            <tr key={crypto?.id} onClick={() => handleCoinClick(crypto)}>
               <td>
                 {crypto?.name}
               </td>
@@ -107,6 +117,10 @@ const CryptoTracker: React.FC = () => {
           Next
         </button>
       </div>
+
+      {selectedCoin && (
+        <CoinChart isOpen={!!selectedCoin} onClose={handleCloseModal} coinData={selectedCoin} />
+      )}
     </div>
   );
 };

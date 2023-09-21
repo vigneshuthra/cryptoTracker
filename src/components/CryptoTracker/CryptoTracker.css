@@ -42,11 +42,31 @@
 .crypto-table th {
   background-color: #2c3034;
   color: #ffffff;
+  text-decoration: underline;
+}
+
+.crypto-table tbody {
+  cursor: pointer;
 }
 
 .crypto-table tbody tr:nth-child(even) {
   background-color: #2c3034;
 }
+
+.crypto-table tbody tr:hover td{
+  cursor:pointer;
+  color: #00FF7F;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+}
+
+.crypto-table tbody tr:first-child:hover td {
+  border-top: none;
+}
+.crypto-table tbody tr:last-child:hover td {
+  border-bottom: none;
+}
+
 
 .crypto-logo {
   width: 30px;
