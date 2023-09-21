@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-scroll';
+import CryptoTracker from '../CryptoTracker';
 
 
 
@@ -35,7 +36,7 @@ const SmoothScroll: React.FC = () => {
             </li>
             <li>
               <Link to="section2" smooth={true} duration={500}>
-                Section 2
+                Tracker
               </Link>
             </li>
           </ul>
@@ -46,7 +47,7 @@ const SmoothScroll: React.FC = () => {
         Section 1
       </div>
       <div id="section2" style={{ height: '800px', background: 'lightgreen' }}>
-        Section 2
+      <CryptoTracker />     
       </div>
     </div>
   );
