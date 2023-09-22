@@ -5,7 +5,7 @@
   <a href="https://crypto-tracker-chi-lac.vercel.app">View Demo</a>
 </p>
 
-<p align="center">An interesting react project to create a Crypto-Tracker using CoinLore Api ! </p>
+<p align="center">An interesting react project to build a Crypto-Tracker using CoinLore Api ! </p>
 
 
 
