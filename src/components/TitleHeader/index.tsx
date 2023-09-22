@@ -1,54 +1,60 @@
 import React from 'react';
 import { Link } from 'react-scroll';
 import CryptoTracker from '../CryptoTracker';
-
 import "./TitleHeader.css";
+
+
+const scrollToSection2 = () => {
+  const section2 = document.querySelector('#section2');
+  if (section2) {
+    section2.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 
 const TitleHeader: React.FC = () => {
   return (
     <div>
-      <nav className='navigation'>
-        <a href='/' className='title'>
-          Crypto-tracker
-        </a>
+      <nav className='navbar'>
+      <div className='nav-container'>
 
-        <button className="hamburger">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="white"
-          >
-            <path
-              fillRule="evenodd"
-              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-
-        <div className='navigation-menu'>
-          <ul>
-            <li>
-              <Link to="section1" smooth={true} duration={500}>
-                Section 1
-              </Link>
-            </li>
-            <li>
-              <Link to="section2" smooth={true} duration={500}>
-                Tracker
-              </Link>
-            </li>
-          </ul>
+        <div className='logo'>
+          <Link to='section1'>
+            CryptoTracker</Link>
         </div>
+
+          <div className='navigation-menu'>
+            <ul>
+              <li>
+                <Link to="section1" smooth={true} duration={500}>
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="section2" smooth={true} duration={500}>
+                  Tracker
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
       </nav>
 
-      <div id="section1" style={{ height: '800px', background: 'lightblue' }}>
-        Section 1
+      <div className='smooth-scroll-container'>
+
+        <div className='section-1' id="section1" style={{ height: '800px', background: '#2c3034'}}>
+          <div className='title' >Welcome to CryptoTracker</div>
+          <div className='subtitle'>Track cryptocurrency prices in real-time</div>
+          <button className='scroll-button' onClick={scrollToSection2}>Go to the Tracker</button>
+
+        </div>
+
+        <div className='section-2' id="section2" style={{ height: '900px', background: 'gray' }}>
+          <CryptoTracker />
+        </div>
+
       </div>
-      <div id="section2" className='section2' style={{ height: '800px', background: 'gray' }}>
-        <CryptoTracker />
-      </div>
+
     </div>
   );
 };

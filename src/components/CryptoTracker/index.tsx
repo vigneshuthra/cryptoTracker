@@ -67,8 +67,9 @@ const CryptoTracker: React.FC = () => {
   };
 
   return (
-    <div>
-      <center>
+    <div className='table-container'>
+     
+      <center >
         <h2>Cryptocurrency Tracker</h2>
         <input
           className='search-bar'
