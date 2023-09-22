@@ -17,12 +17,12 @@ const TitleHeader: React.FC = () => {
   return (
     <div>
       <nav className='navbar'>
-      <div className='nav-container'>
+        <div className='nav-container'>
 
-        <div className='logo'>
-          <Link to='section1'>
-            CryptoTracker</Link>
-        </div>
+          <div className='logo'>
+            <Link to='section1'>
+              CryptoTracker</Link>
+          </div>
 
           <div className='navigation-menu'>
             <ul>
@@ -44,7 +44,8 @@ const TitleHeader: React.FC = () => {
 
       <div className='smooth-scroll-container'>
 
-        <div className='section-1' id="section1" style={{ height: '800px', background: '#2c3034'}}>
+        <div className='section-1' id="section1" style={{ height: '800px', background: '#2c3034' }}>
+
           <div className='title' >Welcome to CryptoTracker</div>
           <div className='subtitle'>Track cryptocurrency prices in real-time  <FontAwesomeIcon icon={faRocket} beat /></div>
           <button className='scroll-button' onClick={scrollToSection2}>Go to the Tracker</button>

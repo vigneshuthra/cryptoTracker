@@ -1,23 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./CryptoTracker.css";
-import CoinChart from '../CoinCharts'; 
+import CoinChart from '../CoinCharts';
 
 
 const CryptoTracker: React.FC = () => {
   const [cryptoData, setCryptoData] = useState<any[]>([]);
   const [searchInput, setSearchInput] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 10; 
-  const [selectedCoin, setSelectedCoin] = useState<any | null>(null); 
+  const itemsPerPage = 10;
+  const [selectedCoin, setSelectedCoin] = useState<any | null>(null);
 
-  const handleCoinClick = (coin: any) => {
-    setSelectedCoin(coin);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedCoin(null);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,9 +26,9 @@ const CryptoTracker: React.FC = () => {
     fetchData();
 
     const intervalId = setInterval(fetchData, 60000);
-
     return () => clearInterval(intervalId);
   }, []);
+
 
   useEffect(() => {
     const getCachedData = () => {
@@ -48,11 +41,13 @@ const CryptoTracker: React.FC = () => {
     getCachedData();
   }, []);
 
+
   const filteredCryptoData = cryptoData
     .filter((crypto) =>
       crypto.name.toLowerCase().includes(searchInput.toLowerCase())
     )
     .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
 
   const totalPages = Math.ceil(
     cryptoData.filter((crypto) =>
@@ -60,15 +55,25 @@ const CryptoTracker: React.FC = () => {
     ).length / itemsPerPage
   );
 
+
   const handlePageChange = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
     }
   };
 
+  const handleCoinClick = (coin: any) => {
+    setSelectedCoin(coin);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedCoin(null);
+  };
+
+
   return (
     <div className='table-container'>
-     
+
       <center >
         <h2>Cryptocurrency Tracker</h2>
         <input

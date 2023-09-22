@@ -63,11 +63,10 @@
 .crypto-table tbody tr:first-child:hover td {
   border-top: none;
 }
+
 .crypto-table tbody tr:last-child:hover td {
   border-bottom: none;
 }
-
-
 
 .crypto-logo {
   width: 30px;
