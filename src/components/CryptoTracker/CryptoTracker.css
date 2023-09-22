@@ -99,11 +99,18 @@
 }
 
 @media (max-width: 768px) {
+  .crypto-container {
+    padding: 10px; 
+  }
+
+  .search-bar {
+    max-width: 100%; 
+  }
+
   .crypto-table th,
   .crypto-table td {
     padding: 10px;
-    font-size: 14px;
-  }
+    font-size: 14px; 
 
   .crypto-logo {
     width: 24px;
@@ -117,5 +124,6 @@
   .pagination button {
     padding: 8px 15px;
     font-size: 14px;
+  }
   }
 }

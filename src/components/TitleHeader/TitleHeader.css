@@ -73,7 +73,11 @@
 
 
 @media (max-width: 768px) {
-  .section2 {
+  .section-2 {
+    height: auto;
+    padding: 20px;
+  }
+  .section-1 {
     height: auto;
     padding: 20px;
   }
